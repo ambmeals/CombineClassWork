@@ -10,30 +10,32 @@
 
             string choice = Console.ReadLine();
 
-            if (choice != "1" && choice != "2")  
+            if (choice != "1" && choice != "2")
+            {
                 Console.WriteLine("Invalid choice.");
-            
+                return;
+            }
+
+
+            if (choice != "2")
+            {
+                Console.Write("Enter the number of coin flips: ");
+                int numFlips = int.Parse(Console.ReadLine());
+
+                FlipMultipleCoins(numFlips);
+            }
             else
             {
-                if (choice != "2") {
-                    Console.Write("Enter the number of coin flips: ");
+                Console.WriteLine("Enter four integer values separated by spaces:");
+                string[] inputs = Console.ReadLine().Split();
 
-                    int numFlips = int.Parse(Console.ReadLine());
-                    FlipMultipleCoins(numFlips);
-                }
-                else
-                {
-                    Console.WriteLine("Enter four integer values separated by spaces:");
-                    string[] inputs = Console.ReadLine().Split();
+                int valueOne = int.Parse(inputs[0]);
+                int valueTwo = int.Parse(inputs[1]);
+                int valueThree = int.Parse(inputs[2]);
+                int valueFour = int.Parse(inputs[3]);
 
-                    int valueOne = int.Parse(inputs[0]);
-                    int valueTwo = int.Parse(inputs[1]);
-                    int valueThree = int.Parse(inputs[2]);
-                    int valueFour = int.Parse(inputs[3]);
-
-                    SwapValues(ref valueOne, ref valueTwo, ref valueThree, ref valueFour);
-                    Console.WriteLine($"{valueOne} {valueTwo} {valueThree} {valueFour}");
-                }
+                SwapValues(ref valueOne, ref valueTwo, ref valueThree, ref valueFour);
+                Console.WriteLine($"{valueOne} {valueTwo} {valueThree} {valueFour}");
             }
         }
 
@@ -41,14 +43,14 @@
         {
             Random random = new Random();
 
-            for (int i = 0; i < numFlips; ++i)       
-                Console.WriteLine(Flip(random));           
+            for (int i = 0; i < numFlips; ++i)
+                Console.WriteLine(Flip(random));
         }
 
         private static string Flip(Random random)
         {
-            return random.Next(2) == 1 
-                ? "Heads" 
+            return random.Next(2) == 1
+                ? "Heads"
                 : "Tails";
         }
 
