@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CombineClassWork
+﻿namespace CombineClassWork
 {
     class Program
     {
