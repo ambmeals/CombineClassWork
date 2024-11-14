@@ -4,38 +4,52 @@
     {
         static void Main()
         {
-            Console.WriteLine("Choose an option:");
-            Console.WriteLine("1. Coin Flip");
-            Console.WriteLine("2. Switch Values");
-
-            string choice = Console.ReadLine();
-
-            if (choice != "1" && choice != "2")
+            while (true)
             {
-                Console.WriteLine("Invalid choice.");
-                return;
-            }
+                Console.WriteLine("Choose an option:");
+                Console.WriteLine("1. Coin Flip");
+                Console.WriteLine("2. Switch Values");
+                Console.WriteLine("3. Exit");
 
+                string choice = Console.ReadLine();
 
-            if (choice != "2")
-            {
-                Console.Write("Enter the number of coin flips: ");
-                int numFlips = int.Parse(Console.ReadLine());
+                if (choice == "3")
+                    break;
 
-                FlipMultipleCoins(numFlips);
-            }
-            else
-            {
-                Console.WriteLine("Enter four integer values separated by spaces:");
-                string[] inputs = Console.ReadLine().Split();
+                if (choice != "1" && choice != "2")
+                {
+                    Console.WriteLine("Invalid choice.");
+                    continue;
+                }
 
-                int valueOne = int.Parse(inputs[0]);
-                int valueTwo = int.Parse(inputs[1]);
-                int valueThree = int.Parse(inputs[2]);
-                int valueFour = int.Parse(inputs[3]);
+                if (choice == "1")
+                {
+                    Console.Write("Enter the number of coin flips: ");
 
-                SwapValues(ref valueOne, ref valueTwo, ref valueThree, ref valueFour);
-                Console.WriteLine($"{valueOne} {valueTwo} {valueThree} {valueFour}");
+                    if (int.TryParse(Console.ReadLine(), out int numFlips))
+                        FlipMultipleCoins(numFlips);
+                    else
+                        Console.WriteLine("Invalid number of flips.");
+                }
+                else
+                {
+                    Console.WriteLine("Enter four integer values separated by spaces:");
+                    string[] inputs = Console.ReadLine().Split();
+
+                    if (inputs.Length == 4 &&
+                        int.TryParse(inputs[0], out int valueOne) &&
+                        int.TryParse(inputs[1], out int valueTwo) &&
+                        int.TryParse(inputs[2], out int valueThree) &&
+                        int.TryParse(inputs[3], out int valueFour))
+                    {
+                        SwapValues(ref valueOne, ref valueTwo, ref valueThree, ref valueFour);
+                        Console.WriteLine($"{valueOne} {valueTwo} {valueThree} {valueFour}");
+                    }
+                    else
+                        Console.WriteLine("Invalid input. Please enter four integers.");
+                }
+
+                Console.WriteLine();
             }
         }
 
@@ -47,12 +61,9 @@
                 Console.WriteLine(Flip(random));
         }
 
-        private static string Flip(Random random)
-        {
-            return random.Next(2) == 1
-                ? "Heads"
-                : "Tails";
-        }
+        private static string Flip(Random random) => random.Next(2) == 1 
+            ? "Heads" 
+            : "Tails";
 
         private static void SwapValues(ref int valOne, ref int valTwo, ref int valThree, ref int valFour)
         {
