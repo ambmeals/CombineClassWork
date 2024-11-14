@@ -28,6 +28,7 @@ namespace CombineClassWork
             if (choice != "1" && choice != "2")
             {
                 Console.WriteLine("Invalid choice.");
+
                 ShowMenu();
                 return;
             }
@@ -35,6 +36,7 @@ namespace CombineClassWork
             if (choice == "1")
             {
                 Console.Write("Enter the number of coin flips: ");
+
                 if (int.TryParse(Console.ReadLine(), out int numFlips))
                     FlipMultipleCoins(numFlips);
                 else
@@ -43,6 +45,7 @@ namespace CombineClassWork
             else
             {
                 Console.WriteLine("Enter four integer values separated by spaces:");
+
                 string[] inputs = Console.ReadLine().Split();
 
                 if (inputs.Length == 4 &&
@@ -70,8 +73,8 @@ namespace CombineClassWork
                 Console.WriteLine(Flip(random));
         }
 
-        private static string Flip(Random random) => random.Next(2) == 1 
-            ? "Heads" 
+        private static string Flip(Random random) => random.Next(2) != 0
+            ? "Heads"
             : "Tails";
 
         private static void SwapValues(ref int valOne, ref int valTwo, ref int valThree, ref int valFour)
